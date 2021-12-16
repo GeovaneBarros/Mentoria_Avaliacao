@@ -9,9 +9,9 @@ nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
 
-def y_encoder(X, dict_change):
+def y_encoder(y, dict_change):
     new_x = []
-    for item in X:
+    for item in y:
         for key in dict_change:
             if key == item:
                 new_x.append(dict_change[key])

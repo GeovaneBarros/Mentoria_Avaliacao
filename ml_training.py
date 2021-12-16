@@ -1,4 +1,3 @@
-from os import access
 import pandas as pd
 from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
 
@@ -31,7 +30,7 @@ def full_training(X_train, y_train, X_test, y_test, models, params, list_metrics
         df[name] = []
 
     for model in models:
-        model_training = RandomizedSearchCV(models[model], params[model], n_iter=n_iter, random_state=10).fit(X_train, y_train)
+        model_training = RandomizedSearchCV(models[model], params[model], n_iter=n_iter, random_state=10, cv=3).fit(X_train, y_train)
         y_pred = model_training.predict(X_test)
         df['Model'].append(model)
         df['Params'].append(model_training.best_params_)
@@ -49,7 +48,7 @@ def final_training(X_train, y_train, X_test, y_test, model, params, list_metrics
         name = metric.__name__
         df[name] = ''
 
-    model_training = GridSearchCV(model, params).fit(X_train, y_train)
+    model_training = GridSearchCV(model, params, cv=2).fit(X_train, y_train)
     y_pred = model_training.predict(X_test)
     
     df['Params'] = model_training.best_estimator_

@@ -16,19 +16,15 @@ METHODS = [TfidfVectorizer(), CountVectorizer()]
 
 DF_TRAIN = './SRC/train_binary_small.csv'
 DF_TEST = './SRC/test_binary_small.csv'
+DF_PREDICT = './SRC/test.csv'
 
-MODEL_FINAL = Models.MLP_2_layer.value
-MODEL_PARAMS = {'hidden_layer_sizes':(178, 270), 'max_iter':1000}
-
-METHOD_FINAL = CountVectorizer()
-METHOD_PARAMS = {'max_df':0.5}
-
-
-Y_ENCODER = {
+# Esta constante é definida para manter a padronização dos dados de y, transformando dados categóricos em numéricos
+Y_CHANGE_WORDS = {
     'Toxic':1,
     'Non-Toxic':0
 }
 
+# This constant is defined after data analisys. Irá ser utilizada para o preprocessamento 
 X_CHANGE_WORDS = {
     "'re" : ' are ',
     "'is": ' is ',
